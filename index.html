@@ -5,282 +5,225 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tisi Burger - Calculadora</title>
     <style>
-        :root {
-            --naranja: #ff6600;
-            --negro: #000000;
-            --gris: #1a1a1a;
-            --blanco: #ffffff;
-        }
+        body { background-color: #000; color: #fff; font-family: 'Arial', sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: auto; border: 2px solid #ff6600; border-radius: 15px; padding: 20px; background-color: #111; box-shadow: 0 0 15px #ff6600; }
+        
+        .header-container { text-align: center; margin-bottom: 10px; }
+        h1 { color: #ff6600; text-transform: uppercase; margin: 0; font-size: 2.2em; letter-spacing: 2px; }
+        
+        .subtitle { text-align: center; color: #ff6600; font-size: 0.9em; margin-bottom: 20px; border-bottom: 1px dashed #ff6600; padding-bottom: 10px; }
+        .item { border-bottom: 1px solid #333; padding: 15px 0; }
+        .row { display: flex; justify-content: space-between; align-items: center; }
+        .details { font-size: 0.85em; color: #bbb; display: block; margin: 5px 0; }
+        
+        .qty-controls { display: flex; align-items: center; gap: 10px; }
+        .btn-qty { background-color: #ff6600; color: #000; border: none; width: 35px; height: 35px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 1.3em; }
+        .btn-qty:active { background-color: #cc5200; }
+        .qty-num { font-size: 1.2em; min-width: 20px; text-align: center; font-weight: bold; }
 
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: var(--negro);
-            color: var(--blanco);
-            margin: 0;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 450px;
-            background-color: var(--gris);
-            padding: 20px;
-            border-radius: 25px;
-            border: 1px solid #333;
-        }
-
-        h1 {
-            color: var(--naranja);
-            text-align: center;
-            margin-bottom: 0;
-            font-size: 2.5rem;
-            font-style: italic;
-        }
-
-        .promo-tag {
-            text-align: center;
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-bottom: 20px;
-        }
-
-        .shipping-banner {
-            background: var(--naranja);
-            color: black;
-            text-align: center;
-            font-weight: bold;
-            padding: 5px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            color: var(--naranja);
-            border-bottom: 2px solid var(--naranja);
-            margin: 25px 0 15px 0;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .item {
-            background: #252525;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 12px;
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .item-name { font-weight: bold; font-size: 1.1rem; }
-        .item-price { color: var(--naranja); font-weight: bold; }
-        .item-desc { font-size: 0.8rem; color: #999; display: block; margin-top: 3px; }
-
-        .item-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .note-input {
-            flex-grow: 1;
-            background: #111;
-            border: 1px solid #444;
-            color: white;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-        }
-
-        .qty-box {
-            display: flex;
-            align-items: center;
-            background: var(--negro);
-            border-radius: 10px;
-            padding: 2px;
-        }
-
-        .btn-qty {
-            background: var(--naranja);
-            color: black;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .qty-val { width: 35px; text-align: center; font-weight: bold; }
-
-        .footer-total {
-            background: var(--naranja);
-            color: black;
-            padding: 20px;
-            border-radius: 20px;
-            margin-top: 30px;
-            position: sticky;
-            bottom: 10px;
-        }
-
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-
-        .whatsapp-btn {
-            display: block;
-            background: #25D366;
-            color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
+        input[type="text"], textarea { width: 100%; padding: 10px; margin-top: 8px; border-radius: 5px; border: 1px solid #444; background: #222; color: #fff; box-sizing: border-box; }
+        .total-box { background-color: #ff6600; color: #000; padding: 20px; margin-top: 20px; border-radius: 10px; text-align: center; font-weight: 800; font-size: 1.2em; }
+        .btn-whatsapp { display: block; width: 100%; background-color: #25d366; color: white; text-align: center; padding: 15px; margin-top: 20px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 1.1em; }
+        .extra-header { color: #ff6600; margin-top: 30px; border-left: 4px solid #ff6600; padding-left: 10px; text-transform: uppercase; font-size: 1em; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>TISI BURGER</h1>
-    <p class="promo-tag">Dobles & Con Papas Incluidas 🍟</p>
-    <div class="shipping-banner">ENVÍO: $3.000</div>
-
-    <div id="burgers-list">
-        <div class="section-title">Nuestras Burgers</div>
-        <!-- Inyectado por JS -->
+    <div class="header-container">
+        <h1>TISI BURGER</h1>
     </div>
+    
+    <p class="subtitle">Dobles y con papas fritas incluidas</p>
 
-    <div id="papas-list">
-        <div class="section-title">Porciones de Papas</div>
-        <!-- Inyectado por JS -->
-    </div>
-
-    <div id="extras-list">
-        <div class="section-title">Adicional para las papas que ya vienen</div>
-        <!-- Inyectado por JS -->
-    </div>
-
-    <div class="footer-total">
-        <div class="total-row" style="font-size: 0.9rem; margin-bottom: 5px; opacity: 0.8;">
-            <span>Envío:</span>
-            <span>$3.000</span>
+    <div id="menu">
+        <div class="item" data-name="Tisi" data-price="12500">
+            <div class="row">
+                <span><strong>Tisi</strong> ($12.500)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <span class="details">Doble medallón, cheddar, cebolla caramelizada, huevo, panceta y salsa big.</span>
+            <input type="text" placeholder="Comentarios (ej: sin cebolla)..." class="comment">
         </div>
-        <div class="total-row">
-            <span>TOTAL:</span>
-            <span id="display-total">$3.000</span>
+
+        <div class="item" data-name="Pepex" data-price="12500">
+            <div class="row">
+                <span><strong>Pepex</strong> ($12.500)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <span class="details">Doble medallón, cheddar, salsa alioli, huevo.</span>
+            <input type="text" placeholder="Comentarios..." class="comment">
         </div>
-        <a href="#" class="whatsapp-btn" onclick="enviarPedido()">PEDIR POR WHATSAPP</a>
+
+        <div class="item" data-name="Zito" data-price="13500">
+            <div class="row">
+                <span><strong>Zito</strong> ($13.500)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <span class="details">Doble medallón, cheddar x4, panceta x4, huevo, barbacoa.</span>
+            <input type="text" placeholder="Comentarios..." class="comment">
+        </div>
+
+        <div class="item" data-name="Titix" data-price="13000">
+            <div class="row">
+                <span><strong>Titix</strong> ($13.000)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <span class="details">Doble medallón, cheddar, cebolla caramelizada, panceta, lechuga, tomate y salsa big.</span>
+            <input type="text" placeholder="Comentarios..." class="comment">
+        </div>
+
+        <div class="item" data-name="Sid" data-price="15000">
+            <div class="row">
+                <span><strong>Sid</strong> ($15.000)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <span class="details">Muzza, queso azul, morrón, huevo y barbacoa.</span>
+            <input type="text" placeholder="Comentarios..." class="comment">
+        </div>
+
+        <div class="item" data-name="Koda-boom" data-price="16500">
+            <div class="row">
+                <span><strong>Koda-boom</strong> ($16.500)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <span class="details">Triple medallón, cheddar x3, cebolla crispy x3, huevo x3 y alioli.</span>
+            <input type="text" placeholder="Comentarios..." class="comment">
+        </div>
+
+        <div class="item" data-name="Cheese Burger" data-price="11000">
+            <div class="row">
+                <span><strong>Cheese Burger</strong> ($11.000)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+            <span class="details">Cheddar, cheddar y cheddar (Salsa big opcional).</span>
+            <input type="text" placeholder="¿Salsa Big?" class="comment">
+        </div>
+
+        <h3 class="extra-header">🍟 Porciones de Papas</h3>
+        <div class="item" data-name="Papas Cheddar" data-price="6500">
+            <div class="row">
+                <span>Papas con Cheddar ($6.500)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="item" data-name="Papas Cheddar y Panceta" data-price="8500">
+            <div class="row">
+                <span>Papas Cheddar y Panceta ($8.500)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="extra-header">➕ Extras para tus papas que ya vienen con tu burger</h3>
+        <div class="item" data-name="Extra Cheddar" data-price="2000">
+            <div class="row">
+                <span>Cheddar extra ($2.000)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="item" data-name="Extra Panceta" data-price="2000">
+            <div class="row">
+                <span>Panceta extra ($2.000)</span>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty-num">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="item" style="border: none;">
+        <label style="color: #ff6600; font-weight: bold;">📍 Dirección de entrega:</label>
+        <textarea id="direccion" rows="2" placeholder="Calle, número, departamento..."></textarea>
+    </div>
+
+    <div class="total-box">
+        TOTAL COSTO ENVÍO $3.000: <br>
+        <span id="total-display" style="font-size: 1.6em;">$3.000</span>
+    </div>
+
+    <a href="#" id="wa-btn" class="btn-whatsapp" target="_blank">ENVIAR PEDIDO POR WHATSAPP</a>
 </div>
 
 <script>
-    const shipping = 3000;
-    const items = [
-        { id: 'tisi', cat: 'b', name: 'Tisi', price: 12500, desc: 'Doble medallón, cheddar, cebolla caramelizada, huevo, panceta y salsa big' },
-        { id: 'pepex', cat: 'b', name: 'Pepex', price: 12500, desc: 'Doble medallón, cheddar, salsa alioli, huevo' },
-        { id: 'zito', cat: 'b', name: 'Zito', price: 13500, desc: 'Doble medallón, cheddar x4, panceta x4, huevo, barbacoa' },
-        { id: 'titix', cat: 'b', name: 'Titix', price: 13000, desc: 'Doble medallón, cebolla caramelizada, panceta, lechuga, tomate y salsa big' },
-        { id: 'sid', cat: 'b', name: 'Sid', price: 15000, desc: 'Muzza, queso azul, morron, huevo y barbacoa' },
-        { id: 'koda', cat: 'b', name: 'Koda-boom', price: 16500, desc: 'Triple medallón, cheddar x3, cebolla crispy x3, huevo x3 y salsa alioli' },
-        { id: 'cheese', cat: 'b', name: 'Cheese Burger', price: 11000, desc: 'Cheddar, cheddar y cheddar (salsa big opcional)' },
-        { id: 'p_cheddar', cat: 'p', name: 'Papas con Cheddar', price: 6500, desc: 'Porción aparte' },
-        { id: 'p_completa', cat: 'p', name: 'Papas Cheddar y Panceta', price: 8500, desc: 'Porción aparte' },
-        { id: 'extra_ch', cat: 'e', name: 'Extra Cheddar', price: 2000, desc: 'Para las papas del combo' },
-        { id: 'extra_pa', cat: 'e', name: 'Extra Panceta', price: 2000, desc: 'Para las papas del combo' }
-    ];
+    function changeQty(btn, delta) {
+        const qtySpan = btn.parentElement.querySelector('.qty-num');
+        let currentQty = parseInt(qtySpan.innerText);
+        currentQty += delta;
+        if (currentQty < 0) currentQty = 0;
+        qtySpan.innerText = currentQty;
+        calcular();
+    }
 
-    let cart = {};
-
-    function render() {
+    function calcular() {
+        let total = 3000; 
+        let items = document.querySelectorAll('.item[data-price]');
+        let resumen = "🍔 *TISI BURGER - PEDIDO* 🍔%0A%0A";
+        
         items.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'item';
-            div.innerHTML = `
-                <div class="item-header">
-                    <div>
-                        <span class="item-name">${item.name}</span>
-                        <span class="item-desc">${item.desc}</span>
-                    </div>
-                    <span class="item-price">$${item.price.toLocaleString()}</span>
-                </div>
-                <div class="item-controls">
-                    <input type="text" class="note-input" id="note-${item.id}" placeholder="Notas (ej: sin cebolla)" oninput="updateNote('${item.id}', this.value)">
-                    <div class="qty-box">
-                        <button class="btn-qty" onclick="changeQty('${item.id}', -1)">-</button>
-                        <span class="qty-val" id="qty-${item.id}">0</span>
-                        <button class="btn-qty" onclick="changeQty('${item.id}', 1)">+</button>
-                    </div>
-                </div>
-            `;
-            
-            if(item.cat === 'b') document.getElementById('burgers-list').appendChild(div);
-            else if(item.cat === 'p') document.getElementById('papas-list').appendChild(div);
-            else document.getElementById('extras-list').appendChild(div);
-            
-            cart[item.id] = { qty: 0, note: '', price: item.price, name: item.name };
-        });
-    }
+            let cant = parseInt(item.querySelector('.qty-num').innerText);
+            let precio = item.getAttribute('data-price');
+            let nombre = item.getAttribute('data-name');
+            let comentario = item.querySelector('.comment') ? item.querySelector('.comment').value : "";
 
-    function changeQty(id, delta) {
-        cart[id].qty = Math.max(0, cart[id].qty + delta);
-        document.getElementById(`qty-${id}`).innerText = cart[id].qty;
-        updateTotal();
-    }
-
-    function updateNote(id, val) {
-        cart[id].note = val;
-    }
-
-    function updateTotal() {
-        let subtotal = 0;
-        for (const key in cart) {
-            subtotal += cart[key].qty * cart[key].price;
-        }
-        document.getElementById('display-total').innerText = `$${(subtotal + shipping).toLocaleString()}`;
-    }
-
-    function enviarPedido() {
-        let hasItems = false;
-        let text = "*NUEVO PEDIDO - TISI BURGER*%0A----------------------------%0A";
-        let subtotal = 0;
-
-        for (const key in cart) {
-            const item = cart[key];
-            if (item.qty > 0) {
-                hasItems = true;
-                text += `*${item.qty}x ${item.name}* ($${(item.price * item.qty).toLocaleString()})%0A`;
-                if(item.note) text += `_Nota: ${item.note}_%0A`;
-                text += `%0A`;
-                subtotal += (item.price * item.qty);
+            if (cant > 0) {
+                total += (cant * precio);
+                resumen += `*${cant}x* ${nombre} ($${precio})%0A`;
+                if(comentario) resumen += `   _Nota: ${comentario}_%0A`;
             }
-        }
+        });
 
-        if(!hasItems) return alert("Por favor, agrega algo al pedido.");
+        let dir = document.getElementById('direccion').value;
+        document.getElementById('total-display').innerText = "$" + total.toLocaleString();
 
-        text += `----------------------------%0A`;
-        text += `*Envío:* $3.000%0A`;
-        text += `*TOTAL A PAGAR: $${(subtotal + shipping).toLocaleString()}*%0A`;
-        text += `----------------------------%0A`;
-        text += `_Todas las burgers vienen dobles y con papas._`;
-
-        window.open(`https://wa.me/message/IGYUCUEBUHRPC1?text=${text}`, '_blank');
+        let linkBase = "https://wa.me/message/IGYUCUEBUHRPC1?text=";
+        let msjFinal = resumen + `%0A📍 *Dirección:* ${dir}%0A%0A*TOTAL FINAL:* $${total.toLocaleString()}`;
+        
+        document.getElementById('wa-btn').href = linkBase + msjFinal;
     }
 
-    render();
+    document.getElementById('direccion').addEventListener('input', calcular);
 </script>
 
 </body>
